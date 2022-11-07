@@ -1,24 +1,21 @@
-import { Box, Pagination } from "@mui/material";
-import { useGetAllCharacters } from "./modules/characters/characterHooks";
-import { Loader } from "./uikit/components/Loader";
-import Bg from "../src/img/Mortal-Kombat-Logo.png";
+import { GridItem, Grid } from "@chakra-ui/react";
+
+import { AllCharactersContainer } from "./uikit/containers/AllCharactersContainer";
 
 function App() {
-  const { data, isLoading } = useGetAllCharacters({
-    page: 1,
-    limit: 20,
-  });
-
-  if (isLoading) {
-    return <Loader />;
-  }
-
   return (
-    <Box width="100%" height="100vh">
-      <img src={Bg} alt="mortal-kombat-logo" width="1000" height="500" />
-      <h1>{JSON.stringify(data)}</h1>
-      <Pagination count={10} />
-    </Box>
+    <Grid
+      h="100vh"
+      templateRows="repeat(3, 1fr)"
+      templateColumns="repeat(7, 1fr)"
+      gap={2}
+    >
+      <GridItem rowSpan={2} colSpan={5}>
+        <AllCharactersContainer />
+      </GridItem>
+      <GridItem rowSpan={3} colSpan={2} bg="papayawhip" />
+      <GridItem colSpan={5} bg="tomato" />
+    </Grid>
   );
 }
 
