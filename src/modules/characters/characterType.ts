@@ -21,5 +21,7 @@ export interface Tag {
 
 export interface GetAllCharatersRequest {
   page: number;
-  limit: number;
+  limit: number | "all";
+  name?: string;
+  tags?: Array<string>;
 }

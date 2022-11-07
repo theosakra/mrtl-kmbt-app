@@ -1,16 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "normalize.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { QueryProvider } from "./providers/QueryProvider";
+import { ThemeProvider } from "./providers/ThemeProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as Element);
 root.render(
   <React.StrictMode>
-    <QueryProvider>
-      <App />
-    </QueryProvider>
+    <ThemeProvider>
+      <QueryProvider>
+        <App />
+      </QueryProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );
 
