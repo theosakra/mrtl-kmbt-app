@@ -1,7 +1,10 @@
 import { BASE_URL } from "../../shared/constant";
 import { fetcher } from "../../shared/fetcher";
 import { Character } from "../../types";
-import { GetAllCharatersRequest } from "./characterType";
+import {
+  GetAllCharatersRequest,
+  GetCharacterByIDRequest,
+} from "./characterType";
 
 export const getAllCharaters = (payload: GetAllCharatersRequest) => {
   // this should be handled by backend
@@ -21,4 +24,8 @@ export const getAllCharaters = (payload: GetAllCharatersRequest) => {
   return fetcher<Array<Character>>(
     `${BASE_URL}?_page=${payload.page}&_limit=${payload.limit}`
   );
+};
+
+export const getCharacterByID = (payload: GetCharacterByIDRequest) => {
+  return fetcher<Character>(`${BASE_URL}/${payload.id}`);
 };

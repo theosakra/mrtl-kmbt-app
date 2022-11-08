@@ -1,6 +1,10 @@
 import { useQuery, UseQueryOptions } from "react-query";
-import { getAllCharaters } from "./characterService";
-import { Character, GetAllCharatersRequest } from "./characterType";
+import { getAllCharaters, getCharacterByID } from "./characterService";
+import {
+  Character,
+  GetAllCharatersRequest,
+  GetCharacterByIDRequest,
+} from "./characterType";
 
 export const useGetAllCharacters = (
   payload: GetAllCharatersRequest,
@@ -14,6 +18,22 @@ export const useGetAllCharacters = (
   return useQuery(
     ["all-characters", payload],
     () => getAllCharaters(payload),
+    options
+  );
+};
+
+export const useGetCharacterByID = (
+  payload: GetCharacterByIDRequest,
+  options: UseQueryOptions<
+    Character,
+    unknown,
+    Character,
+    Array<string | GetCharacterByIDRequest>
+  >
+) => {
+  return useQuery(
+    ["character-by-id", payload],
+    () => getCharacterByID(payload),
     options
   );
 };
