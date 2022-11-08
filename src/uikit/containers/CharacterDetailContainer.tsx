@@ -17,7 +17,7 @@ import shallow from "zustand/shallow";
 import { useGetCharacterByID } from "../../modules/characters/characterHooks";
 import { useCharacterStore } from "../../modules/characters/characterStore";
 import { Character } from "../../types";
-import { EmptyStateCharacterDetail } from "../components/EmptyState/EmptyStateCharacterDetail";
+import { EmptyStateCharacterDetail } from "../components/EmptyStateCharacterDetail";
 
 const Name = (props: { name: string }) => {
   return (

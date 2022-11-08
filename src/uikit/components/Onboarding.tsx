@@ -17,12 +17,12 @@ const steps: Array<Step> = [
   {
     target: ".filter-by-tags",
     content:
-      "You can also search for multiple character that has the same tags",
+      "You can also search for multiple characters that has the same tags",
   },
   {
     target: ".filter-btn",
     content:
-      "Filter button is for applying the filter on shown characters, and the reset button used to clear all filters and return characters to default view",
+      "Filter button is for applying the filter on shown characters, and the reset button is to clear all filters and return characters to default view",
   },
   {
     target: ".character-detail",
