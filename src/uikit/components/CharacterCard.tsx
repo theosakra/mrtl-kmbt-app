@@ -1,14 +1,23 @@
-import { Avatar, Stack } from "@mui/material";
+import { Avatar } from "@chakra-ui/react";
 
 export interface CharacterCardProps {
   src: string;
   alt: string;
+  onClick?: () => void;
 }
 
 export const CharacterCard = (props: CharacterCardProps) => {
   return (
-    <Stack spacing={2}>
-      <Avatar src={props.src} sx={{ width: "5rem", height: "5rem" }} />
-    </Stack>
+    <Avatar
+      src={props.src}
+      name={props.alt}
+      onClick={props.onClick}
+      boxSize="5rem"
+      cursor="pointer"
+      _hover={{
+        transform: "scale(1.75)",
+        zIndex: 100,
+      }}
+    />
   );
 };

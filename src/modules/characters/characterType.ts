@@ -25,3 +25,14 @@ export interface GetAllCharatersRequest {
   name?: string;
   tags?: Array<string>;
 }
+
+export interface GetCharacterByIDRequest {
+  id: number;
+}
+
+export type AbilityUnion =
+  | "Mobility"
+  | "Power"
+  | "Technique"
+  | "Survivability"
+  | "Energy";

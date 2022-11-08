@@ -1,7 +1,6 @@
 import { SearchIcon } from "@chakra-ui/icons";
 import {
   SimpleGrid,
-  Avatar,
   VStack,
   ButtonGroup,
   Button,
@@ -15,30 +14,46 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import shallow from "zustand/shallow";
 import { useGetAllCharacters } from "../../modules/characters/characterHooks";
-import { useCharacterStore } from "../../modules/characters/characterStore";
+import {
+  Limit,
+  useCharacterStore,
+} from "../../modules/characters/characterStore";
 import { Loader } from "../components/Loader";
 import Select from "react-select";
 import { CHARACTER_TAGS } from "../../shared/constant";
+import { CharacterCard } from "../components/CharacterCard";
+import { LimitButton } from "../components/LimitButton";
 
 type FormValue = {
   name: string;
   tags: Array<{ value: string; label: string }>;
 };
 
+const buttonLimitValue: Array<Limit> = [40, 80, 120, 160, "all"];
+
 export const AllCharactersContainer = () => {
-  const [limit, setLimit, name, setName, tags, setTags, resetStore] =
-    useCharacterStore(
-      (state) => [
-        state.limit,
-        state.setLimit,
-        state.name,
-        state.setName,
-        state.tags,
-        state.setTags,
-        state.resetStore,
-      ],
-      shallow
-    );
+  const [
+    limit,
+    setLimit,
+    name,
+    setName,
+    tags,
+    setTags,
+    resetStore,
+    setSelectedID,
+  ] = useCharacterStore(
+    (state) => [
+      state.limit,
+      state.setLimit,
+      state.name,
+      state.setName,
+      state.tags,
+      state.setTags,
+      state.resetStore,
+      state.setSelectedID,
+    ],
+    shallow
+  );
 
   const { register, handleSubmit, control } = useForm<FormValue>({
     defaultValues: {
@@ -55,7 +70,14 @@ export const AllCharactersContainer = () => {
   });
 
   return (
-    <VStack spacing="2rem" w="100%" h="100%" align="start" p="1rem">
+    <VStack
+      spacing="2rem"
+      w="100%"
+      h="100%"
+      align="start"
+      p="1rem"
+      className="all-character-container"
+    >
       <SimpleGrid
         w="100%"
         columns={isLoading ? 1 : 12}
@@ -69,16 +91,11 @@ export const AllCharactersContainer = () => {
           <Loader />
         ) : (
           data?.map((datum) => (
-            <Avatar
-              key={datum.id}
+            <CharacterCard
+              alt={datum.name}
               src={datum.thumbnail}
-              name={datum.name}
-              boxSize="5rem"
-              cursor="pointer"
-              _hover={{
-                transform: "scale(1.75)",
-                zIndex: 100,
-              }}
+              key={datum.id}
+              onClick={() => setSelectedID(datum.id)}
             />
           ))
         )}
@@ -87,12 +104,15 @@ export const AllCharactersContainer = () => {
       <HStack spacing="3rem" align="end" h="2.25rem">
         <VStack ml="2.5rem !important" align="start">
           <Text>Show:</Text>
-          <ButtonGroup isAttached size="sm">
-            <Button onClick={() => setLimit(40)}>40</Button>
-            <Button onClick={() => setLimit(80)}>80</Button>
-            <Button onClick={() => setLimit(120)}>120</Button>
-            <Button onClick={() => setLimit(160)}>160</Button>
-            <Button onClick={() => setLimit("all")}>All</Button>
+          <ButtonGroup isAttached size="sm" className="show-by-number">
+            {buttonLimitValue.map((lim, i) => (
+              <LimitButton
+                key={i}
+                limit={lim}
+                onClick={() => setLimit(lim)}
+                isActive={lim === limit}
+              />
+            ))}
           </ButtonGroup>
         </VStack>
 
@@ -107,7 +127,7 @@ export const AllCharactersContainer = () => {
           })}
         >
           <HStack spacing="1rem">
-            <FormControl>
+            <FormControl className="search-by-name">
               <InputGroup size="sm">
                 <InputLeftElement pointerEvents="none">
                   <SearchIcon />
@@ -123,7 +143,7 @@ export const AllCharactersContainer = () => {
               </InputGroup>
             </FormControl>
 
-            <FormControl>
+            <FormControl className="filter-by-tags">
               <Controller
                 name="tags"
                 control={control}
@@ -154,7 +174,7 @@ export const AllCharactersContainer = () => {
               />
             </FormControl>
 
-            <ButtonGroup>
+            <ButtonGroup className="filter-btn">
               <Button
                 size="sm"
                 colorScheme="blue"

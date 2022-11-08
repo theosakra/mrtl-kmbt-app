@@ -1,6 +1,8 @@
+import { AbilityUnion } from "../modules/characters/characterType";
+
 export const BASE_URL = "http://localhost:3001/characters";
 
-// this should be coming from BE as enum
+// this should be coming from BE as both enum and value
 export const CHARACTER_TAGS = [
   "monster",
   "melee",
@@ -23,4 +25,12 @@ export const CHARACTER_TAGS = [
   "ghost",
   "grapple",
   "animal",
+];
+
+export const ABILITY_NAME: Array<AbilityUnion> = [
+  "Mobility",
+  "Technique",
+  "Survivability",
+  "Power",
+  "Energy",
 ];
