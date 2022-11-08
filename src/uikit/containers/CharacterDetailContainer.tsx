@@ -78,74 +78,82 @@ export const CharacterDetailContainer = () => {
   }
 
   return (
-    <HStack w="100%" h="100%" position="relative" p="2.5rem">
-      <CloseButton
-        onClick={() => setSelectedID(null)}
-        position="absolute"
-        right="2rem"
-        top="2rem"
-      />
-
-      <Img
-        src={data.image}
-        alt={data.name}
-        h="15rem"
-        boxShadow="lg"
-        borderRadius="0.5rem"
+    <HStack w="100%" h="100%" p="2.5rem">
+      <HStack
+        position="relative"
         bg="white"
-      />
-
-      <VStack
-        align="start"
-        h="100%"
-        spacing="1rem"
-        ml="2rem !important"
-        mr="5rem !important"
+        py="1rem"
+        borderRadius="0.5rem"
+        boxShadow="md"
       >
-        <Name name={data.name} />
-        <Tags tags={data.tags} />
-      </VStack>
+        <CloseButton
+          onClick={() => setSelectedID(null)}
+          position="absolute"
+          right="2rem"
+          top="2rem"
+        />
 
-      <SimpleGrid w="100%" columns={5} gap="1">
-        {data.abilities.map((ability, i) => (
-          <VStack w="100%" align="center" key={i} h="100%">
-            <Text fontWeight="bold" fontSize="1.35rem">
-              {ability.abilityName}
-            </Text>
-            <Text
-              color={ability.abilityScore === 10 ? "red" : "black"}
-              fontWeight="bold"
-              fontSize="1.25rem"
-            >
-              {ability.abilityScore}
-            </Text>
-          </VStack>
-        ))}
-      </SimpleGrid>
+        <Img
+          src={data.image}
+          alt={data.name}
+          h="15rem"
+          boxShadow="lg"
+          borderRadius="0.5rem"
+          bg="white"
+        />
 
-      <Button
-        size="sm"
-        position="absolute"
-        right="2rem"
-        bottom="2rem"
-        colorScheme="blue"
-        disabled={selectedCharacters.length === 5 || checkIsInTeam(data.name)}
-        onClick={() => {
-          const mappedAbility = new Map();
+        <VStack
+          align="start"
+          h="100%"
+          spacing="1rem"
+          ml="2rem !important"
+          mr="5rem !important"
+        >
+          <Name name={data.name} />
+          <Tags tags={data.tags} />
+        </VStack>
 
-          data.abilities.forEach((datum) => {
-            mappedAbility.set(datum.abilityName, datum.abilityScore);
-          });
+        <SimpleGrid w="100%" columns={5} gap="1">
+          {data.abilities.map((ability, i) => (
+            <VStack w="100%" align="center" key={i} h="100%">
+              <Text fontWeight="bold" fontSize="1.35rem">
+                {ability.abilityName}
+              </Text>
+              <Text
+                color={ability.abilityScore === 10 ? "red" : "black"}
+                fontWeight="bold"
+                fontSize="1.25rem"
+              >
+                {ability.abilityScore}
+              </Text>
+            </VStack>
+          ))}
+        </SimpleGrid>
 
-          return setSelectedCharacters({
-            name: data.name,
-            abilities: mappedAbility,
-            thumbnail: data.thumbnail,
-          });
-        }}
-      >
-        Add to Roster
-      </Button>
+        <Button
+          size="sm"
+          position="absolute"
+          right="2rem"
+          bottom="2rem"
+          colorScheme="blue"
+          disabled={selectedCharacters.length === 5 || checkIsInTeam(data.name)}
+          onClick={() => {
+            const mappedAbility = new Map();
+
+            data.abilities.forEach((datum) => {
+              mappedAbility.set(datum.abilityName, datum.abilityScore);
+            });
+
+            return setSelectedCharacters({
+              name: data.name,
+              abilities: mappedAbility,
+              thumbnail: data.thumbnail,
+            });
+          }}
+        >
+          Add to Roster
+        </Button>
+      </HStack>
     </HStack>
   );
 };

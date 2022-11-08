@@ -35,6 +35,7 @@ export const MyTeamContainer = () => {
         borderRadius="0.5rem"
         p="1rem"
         spacing="2.5rem"
+        bg="white"
       >
         <Heading>
           {team.length === 5
