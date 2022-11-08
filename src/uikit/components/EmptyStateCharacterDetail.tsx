@@ -11,6 +11,7 @@ export const EmptyStateCharacterDetail = () => {
         borderRadius="0.5rem"
         boxShadow={boxShadow}
         className="character-detail"
+        bg="white"
       >
         <Text fontWeight={700} color="blackAlpha.700">
           You haven't selected any character

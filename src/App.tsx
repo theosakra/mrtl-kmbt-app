@@ -1,4 +1,4 @@
-import { GridItem, Grid } from "@chakra-ui/react";
+import { GridItem, Grid, Box } from "@chakra-ui/react";
 import { Onboarding } from "./uikit/components/Onboarding";
 
 import { AllCharactersContainer } from "./uikit/containers/AllCharactersContainer";
@@ -7,7 +7,7 @@ import { MyTeamContainer } from "./uikit/containers/MyTeamContainer";
 
 function App() {
   return (
-    <>
+    <Box w="100%" h="100vh" bg="blue.100">
       <Onboarding />
       <Grid
         h="100vh"
@@ -25,7 +25,7 @@ function App() {
           <CharacterDetailContainer />
         </GridItem>
       </Grid>
-    </>
+    </Box>
   );
 }
 
