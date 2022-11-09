@@ -47,9 +47,8 @@ export const MyTeamContainer = () => {
 
         <SimpleGrid w="80%" columns={5} spacing="1rem" h="10rem">
           {team.map((char) => (
-            <VStack w="100%" h="100%" position="relative">
+            <VStack w="100%" h="100%" position="relative" key={char.name}>
               <Avatar
-                key={char.name}
                 src={char.thumbnail}
                 name={char.name}
                 boxSize="3.75rem"
